@@ -1,0 +1,84 @@
+.nftFrame img {
+    width: 500px;
+    margin-bottom: 5px;
+}
+
+.nftFrame .name,  .nftFrame .status{
+    margin-bottom: 15px;
+}
+
+.nftFrame {
+    display: inline-block;
+    text-align: center;
+    margin: 20px;
+}
+
+  .prompt-buttons {
+    display: flex;
+    place-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    flex-flow: row nowrap;
+    gap: 12px;
+    height: min-content;
+    overflow: hidden;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+}
+
+.generate-button {
+    background-color: #254cdd;
+    color:white;
+    border-radius: 10px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: column nowrap;
+    gap: 10px;
+    height: min-content;
+    overflow: hidden;
+    padding: 12px 20px;
+    position: relative;
+    text-decoration: none;
+    will-change: transform;
+    cursor: pointer;
+}
+
+.generate {
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    transform: none;
+}
+
+.generate p {
+    margin: 0;
+}
+
+.loader {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 2px solid #FFF;
+    border-right: 2px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loading {
+    opacity: 0.7;
+    cursor: default;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
