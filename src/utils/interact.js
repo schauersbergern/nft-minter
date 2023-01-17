@@ -1,5 +1,5 @@
 import React from 'react'
-import { toEtherValue, toHexString } from "./helper.js"
+import { toEtherValue } from "./helper.js"
 import constants from '../utils/constants';
 require('dotenv').config()
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
