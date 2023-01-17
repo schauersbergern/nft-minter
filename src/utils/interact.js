@@ -9,7 +9,6 @@ const contractABI = require('../contract-abi.json')
 const contractAddress = constants.contractAddress
 
 
-
 export const connectWallet = async () => {
     if (window.ethereum) {
       try {
@@ -38,7 +37,7 @@ export const connectWallet = async () => {
             <p>
               {" "}
               🦊{" "}
-              <a target="_blank" href={`https://metamask.io/download.html`}>
+              <a target="_blank" rel="noopener noreferrer" href={`https://metamask.io/download.html`}>
                 You must install Metamask, a virtual Ethereum wallet, in your
                 browser.
               </a>
@@ -83,7 +82,7 @@ export const connectWallet = async () => {
             <p>
               {" "}
               🦊{" "}
-              <a target="_blank" href={`https://metamask.io/download.html`}>
+              <a target="_blank" rel="noopener noreferrer" href={`https://metamask.io/download.html`}>
                 You must install Metamask, a virtual Ethereum wallet, in your
                 browser.
               </a>
@@ -148,7 +147,7 @@ export const getTokenPrice = async(tokenId) => {
     const contract = await new web3.eth.Contract(contractABI, contractAddress)
 
     //const hexId = toHexString(tokenId)
-    const methods = await contract.methods
+    //const methods = await contract.methods
     const tokenPrice = await contract.methods._tokenPrice(tokenId).call()
 
     return toEtherValue(tokenPrice)

@@ -45,13 +45,14 @@ class NFT extends React.Component {
     render() {
         return (
             <div className='nftFrame'>
-                <img src={this.images[this.props.item.image]}></img>
+                <img src={this.images[this.props.item.image]} alt=""></img>
                 <div className='name'>{this.props.item.name}</div>
                 <div className='status'>
                     {this.state.priceText}
                 </div>
                 <div className="prompt-buttons">
                     <a
+                    href=''
                         className={this.state.isGenerating ? 'generate-button loading' : 'generate-button'}
                         onClick={this.onMintPressed}
                     >

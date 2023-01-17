@@ -1,4 +1,3 @@
-import React from 'react';
 const Web3Utils = require('web3-utils')
 
 export const toEtherValue = (wei) => {
@@ -13,6 +12,6 @@ export const toHexString = (intValue) => {
 export const importAllImages = () => {
     let images = {}
     const r = require.context('../imgs', false, /\.(png|jpe?g)$/)
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); })
+    r.keys().map((item, index) => ( images[item.replace('./', '')] = r(item) ))
     return images
 }

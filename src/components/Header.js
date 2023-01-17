@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Header.css'
 import logo from '../imgs/bricon.png'
 import { connectWallet, getCurrentWalletConnected } from "../utils/interact.js"
@@ -60,7 +60,7 @@ class Header extends React.Component {
         <p>
           {" "}
           🦊{" "}
-          <a target="_blank" href={`https://metamask.io/download.html`}>
+          <a target="_blank" rel="noopener noreferrer" href={`https://metamask.io/download.html`}>
             You must install Metamask, a virtual Ethereum wallet, in your
             browser.
           </a>
