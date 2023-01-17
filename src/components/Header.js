@@ -3,8 +3,8 @@ import './Header.css'
 import logo from '../imgs/bricon.png'
 import { connectWallet, getCurrentWalletConnected } from "../utils/interact.js"
 import constants from '../utils/constants'
-import { store } from '../redux/store'
-import { updateStatus } from '../redux/action'
+import { updateStatus } from '../redux/reducer'
+import { connect } from 'react-redux'
 
 const headerText = constants.headerText
 
@@ -47,16 +47,16 @@ class Header extends React.Component {
           this.setState({
             walletAddress: accounts[0]
           })
-          store.dispatch(updateStatus(""))
+          this.props.updateStatus("")
         } else {
           this.setState({
             walletAddress: "",
           })
-          store.dispatch(updateStatus("🦊 Connect to Metamask using the top right button."))
+          this.props.updateStatus("🦊 Connect to Metamask using the top right button.")
         }
       });
     } else {
-      store.dispatch(updateStatus(
+      this.props.updateStatus(
         <p>
           {" "}
           🦊{" "}
@@ -66,12 +66,10 @@ class Header extends React.Component {
           </a>
         </p>
       )
-      )
     }
   };
 
   render() {
-    const globalState = store.getState()
     return (
       <div className="Header">
         <div className="headerColumn">
@@ -92,7 +90,7 @@ class Header extends React.Component {
               )}
             </button>
             <p id="status">
-              {globalState.status}
+              {this.props.status}
             </p>
           </div>
         </div>
@@ -101,4 +99,16 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+      status: state.status.value
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      updateStatus: (status) => dispatch(updateStatus(status))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -2,8 +2,8 @@ import React from 'react'
 import './NFT.css'
 import { mintNFT, getTokenPrice } from "../utils/interact.js"
 import { importAllImages } from "../utils/helper.js"
-import { store } from '../redux/store'
-import { updateStatus } from '../redux/action'
+import { updateStatus } from '../redux/reducer'
+import { connect } from 'react-redux'
 
 class NFT extends React.Component {
 
@@ -34,7 +34,7 @@ class NFT extends React.Component {
 
         const { status } = await mintNFT(this.state.tokenId, this.state.ethPrice)
 
-        store.dispatch(updateStatus(status))
+        this.props.updateStatus(status)
 
         this.setState({
             isGenerating: false
@@ -66,4 +66,16 @@ class NFT extends React.Component {
 
 }
 
-export default NFT;
+const mapStateToProps = state => {
+    return {
+        status: state.status.value
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        updateStatus: (status) => dispatch(updateStatus(status))
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(NFT)

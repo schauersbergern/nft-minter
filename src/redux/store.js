@@ -1,4 +1,8 @@
-import { createStore } from 'redux';
-import reducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit'
+import statusReducer from './reducer'
 
-export const store = createStore(reducer);
+export default configureStore({
+  reducer: {
+    status: statusReducer,
+  },
+})

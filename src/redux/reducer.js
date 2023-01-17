@@ -1,10 +1,16 @@
-const initialState = { status: '' };
+import {createSlice} from '@reduxjs/toolkit'
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case 'UPDATE_STATUS':
-      return { ...state, status: action.status };
-    default:
-      return state;
-  }
-}
+export const statusSlice = createSlice({
+  name: 'status',
+  initialState: {
+    value: '',
+  },
+  reducers: {
+    updateStatus: (state, action) => {
+      state.value = action.payload
+    }
+  },
+})
+
+export const { updateStatus } = statusSlice.actions
+export default statusSlice.reducer
