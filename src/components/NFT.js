@@ -52,7 +52,6 @@ class NFT extends React.Component {
                 </div>
                 <div className="prompt-buttons">
                     <a
-                    href='https://www.google.com'
                         className={this.state.isGenerating ? 'generate-button loading' : 'generate-button'}
                         onClick={this.onMintPressed}
                     >
