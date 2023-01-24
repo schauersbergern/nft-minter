@@ -8,7 +8,7 @@ const Minter = (props) => {
     <div className="Minter">
         {
           constants.nfts.map((nft, index) =>
-            <NFT item = {nft} index = {index}></NFT>
+            <NFT item={nft} index={index} key={index}></NFT>
           )
         }
     </div>

@@ -95,15 +95,6 @@ export const connectWallet = async () => {
 
   export const mintNFT = async(tokenId, tokenPrice) => {
 
-    //TODO: error handling
-    if (isNaN(tokenId)) { 
-        return {
-            success: false,
-            status: "Choose a token Id",
-        }
-    }
-
-
     //load smart contract
     window.contract = new web3.eth.Contract(contractABI, contractAddress)
 

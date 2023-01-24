@@ -28,6 +28,7 @@
     stroke: #000;
   }
 
-.headerContainer {
+.buttonContainer {
   display: inline-block;
+  max-width: 500px;
 }

@@ -81,7 +81,7 @@ class Header extends React.Component {
           </div>
         </div>
         <div className="headerColumn">
-          <div className="headerContainer">
+          <div className="buttonContainer">
             <button id="walletButton" onClick={this.connectWalletPressed}>
               {this.state.walletAddress.length > 0 ? (
                 `Connected: ${String(this.state.walletAddress).substring(0, 6)}...${String(this.state.walletAddress).substring(38)}`
