@@ -1,4 +1,5 @@
 import React from 'react'
+import NumberInputField from './NumberInputField'
 import './NFT.css'
 import { mintNFT, getTokenPrice } from "../utils/interact.js"
 import { importAllImages } from "../utils/helper.js"
@@ -12,6 +13,7 @@ class NFT extends React.Component {
         ethPrice: 0,
         tokenId: -1,
         isGenerating: false,
+        numberOfTokens: 0
     }
 
     images = importAllImages()
@@ -26,13 +28,19 @@ class NFT extends React.Component {
         }))
     }
 
-    onMintPressed = async () => {
+    updateNrOfTokens = (tokens) => {
+        this.setState(prevState => ({
+            numberOfTokens: tokens
+        }))
+      }
+
+    onMintPressed = async (tokenId, ethPrice, numberOfTokens) => {
 
         this.setState({
             isGenerating: true
         })
 
-        const { status } = await mintNFT(this.state.tokenId, this.state.ethPrice)
+        const { status } = await mintNFT(this.state.tokenId, this.state.ethPrice, this.state.numberOfTokens)
 
         this.props.updateStatus(status)
 
@@ -50,6 +58,9 @@ class NFT extends React.Component {
                 <div className='status'>
                     {this.state.priceText}
                 </div>
+                {
+                    <NumberInputField updateNrOfTokens={this.updateNrOfTokens}></NumberInputField>
+                }
                 <div className="prompt-buttons">
                     <a
                         className={this.state.isGenerating ? 'generate-button loading' : 'generate-button'}

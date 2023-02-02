@@ -93,14 +93,21 @@ export const connectWallet = async () => {
     }
   };
 
-  export const mintNFT = async(tokenId, tokenPrice) => {
+  export const mintNFT = async(tokenId, tokenPrice, amount) => {
+
+    if (amount < 1) {
+      return {
+        status: "Please enter a valid amount"
+      }
+    }
 
     //load smart contract
     window.contract = new web3.eth.Contract(contractABI, contractAddress)
 
-    //const hexPrice = tokenPrice.toString(16);
-    //const amountInEther = 2;
-    const weiPrice = web3.utils.toWei(tokenPrice, "ether");
+    
+    const total = tokenPrice * amount;
+
+    const weiPrice = web3.utils.toWei(total.toString(), "ether");
 
     //let gasEstimate = await web3.eth.estimateGas({to:contractAddress, data: window.contract.methods.mint(tokenId, 1).encodeABI() });
 
@@ -109,7 +116,7 @@ export const connectWallet = async () => {
         to: contractAddress, // Required except during contract publications.
         from: window.ethereum.selectedAddress, // must match user's active address.
         value: web3.utils.toHex(weiPrice),
-        'data': window.contract.methods.mint(tokenId, 1).encodeABI() //make call to NFT smart contract 
+        'data': window.contract.methods.mint(tokenId, amount).encodeABI() //make call to NFT smart contract 
     };
 
 
