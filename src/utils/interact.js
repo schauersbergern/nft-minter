@@ -1,12 +1,15 @@
 import React from 'react'
 import { toEtherValue } from "./helper.js"
-import constants from '../utils/constants';
+import constants from '../utils/constants'
+import onboard_cfg from '../utils/wallet-connect-cfg'
 require('dotenv').config()
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
-const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_KEY);
+const web3 = createAlchemyWeb3(process.env.REACT_APP_ALCHEMY_KEY)
 
 const contractABI = require('../contract-abi.json')
 const contractAddress = constants.contractAddress
+
+const onboard = onboard_cfg
 
 
 export const connectWallet = async () => {
