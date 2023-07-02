@@ -1,4 +1,3 @@
-import React from 'react'
 import { toEtherValue } from "./helper.js"
 import constants from '../utils/constants'
 import onboard_cfg from '../utils/wallet-connect-cfg'
@@ -11,103 +10,20 @@ const contractAddress = constants.contractAddress
 
 const onboard = onboard_cfg
 
-
-export const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const addressArray = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        const obj = {
-          status: "",
-          address: addressArray[0],
-          connected: true
-        };
-        return obj;
-      } catch (err) {
-        return {
-          address: "",
-          status: "😥 " + err.message,
-          connected: false
-        };
-      }
-    } else {
-      return {
-        address: "",
-        connected: false,
-        status: (
-          <span>
-            <p>
-              {" "}
-              🦊{" "}
-              <a target="_blank" rel="noopener noreferrer" href={`https://metamask.io/download.html`}>
-                You must install Metamask, a virtual Ethereum wallet, in your
-                browser.
-              </a>
-            </p>
-          </span>
-        ),
-      };
-    }
-  };
-
-  export const getCurrentWalletConnected = async () => {
-    if (window.ethereum) {
-      try {
-        const addressArray = await window.ethereum.request({
-          method: "eth_accounts",
-        });
-        if (addressArray.length > 0) {
-          return {
-            address: addressArray[0],
-            status: "",
-            connected: true
-          };
-        } else {
-          return {
-            address: "",
-            status: "🦊 Connect to Metamask using the top right button.",
-            connected: false
-          };
-        }
-      } catch (err) {
-        return {
-          address: "",
-          status: "😥 " + err.message,
-        };
-      }
-    } else {
-      return {
-        address: "",
-        connected: false,
-        status: (
-          <span>
-            <p>
-              {" "}
-              🦊{" "}
-              <a target="_blank" rel="noopener noreferrer" href={`https://metamask.io/download.html`}>
-                You must install Metamask, a virtual Ethereum wallet, in your
-                browser.
-              </a>
-            </p>
-          </span>
-        ),
-      };
-    }
-  };
-
-  export const mintNFT = async(tokenId, tokenPrice, amount) => {
+export const mintNFT = async (tokenId, tokenPrice, amount) => {
 
     if (amount < 1) {
-      return {
-        status: "Please enter a valid amount"
-      }
+        return {
+            success: false,
+            txHash: null,
+            status: "Please enter a valid amount"
+        }
     }
 
     //load smart contract
     window.contract = new web3.eth.Contract(contractABI, contractAddress)
 
-    
+
     const total = tokenPrice * amount;
 
     const weiPrice = web3.utils.toWei(total.toString(), "ether");
@@ -132,18 +48,20 @@ export const connectWallet = async () => {
             });
         return {
             success: true,
-            status: "✅ Check out your transaction on Etherscan: https://goerli.etherscan.io/tx/" + txHash
+            txHash: txHash,
+            status: ""
         }
     } catch (error) {
         return {
             success: false,
-            status: "😥 Something went wrong: " + error.message
+            txHash: null,
+            status: error.message
         }
     }
 }
 
-export const getTokenPrice = async(tokenId) => {
-    
+export const getTokenPrice = async (tokenId) => {
+
     //load smart contract
     const contract = await new web3.eth.Contract(contractABI, contractAddress)
 

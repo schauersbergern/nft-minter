@@ -5,20 +5,7 @@ const injected = injectedModule()
 
 const onboard_cfg = {
   wallets: [injected],
-  chains: [
-    {
-      id: '0x1',
-      token: 'ETH',
-      label: 'Ethereum Mainnet',
-      rpcUrl: `https://mainnet.infura.io/v3/1`
-    },
-    {
-      id: '0x5',
-      token: 'ETH',
-      label: 'Goerli',
-      rpcUrl: `https://goerli.infura.io/v3/5`
-    }
-  ],
+  chains: constants.chains,
   connect: {
     autoConnectLastWallet: true
   },
